@@ -62,11 +62,24 @@ public class AcervoMemoriaImpl implements IAcervoRepository {
         return true;
     }
 
+
+
     @Override
     public boolean removeLivro(long codigo) {
         List<Livro> tmp = livros.stream()
                 .filter(livro -> livro.getId() == codigo)
                 .toList();
         return tmp.removeAll(tmp);
+    }
+
+    @Override
+    public boolean updateLivro(Livro livro) {
+        for (int i = 0; i < livros.size(); i++) {
+            if (livros.get(i).getId() == livro.getId()) {
+                livros.set(i, livro);
+                return true;
+            }
+        }
+        return false;
     }
 }
